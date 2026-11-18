@@ -1,0 +1,29 @@
+digraph ERD {
+graph [rankdir=TB,bgcolor="white",nodesep=.3,ranksep=.65,pad=.25];
+node [shape=record,fontname="DejaVu Sans",fontsize=11,color="#79909e",style=filled,fillcolor="#f4f8fa",margin=".12,.08"];
+edge [fontname="DejaVu Sans",fontsize=9,color="#42697c",arrowsize=.6];
+users [label="{users|PK id\lusername UNIQUE\lpassword_hash\lrole, token_version\l}"];
+specialties [label="{specialties|PK id\lname, is_active\l}"];
+doctors [label="{doctors|PK id\lFK user_id UNIQUE\lFK specialty_id\l}"];
+schedules [label="{schedules|PK id\lFK doctor_id\lstart_at, end_at\l}"];
+appointments [label="{appointments|PK id\lFK patient_id, slot_id\lstatus, reason\l}"];
+services [label="{services|PK id\lname, price\lis_active\l}"];
+medical_records [label="{medical_records|PK id\lFK appointment_id UNIQUE\lsymptoms, diagnosis, advice\l}"];
+visit_services [label="{visit_services|PK id\lFK appointment_id, service_id\lquantity, unit_price\l}"];
+invoices [label="{invoices|PK id\lFK appointment_id UNIQUE\ltotal, status, paid_at\l}"];
+invoice_items [label="{invoice_items|PK id\lFK invoice_id, service_id\lname, quantity, unit_price\l}"];
+{rank=same;users;specialties}
+{rank=same;doctors;services}
+{rank=same;medical_records;visit_services;invoices}
+users -> doctors [label="1 : 0..1"];
+specialties -> doctors [label="1 : N"];
+doctors -> schedules [label="1 : N"];
+schedules -> appointments [label="1 : N history"];
+users -> appointments [label="1 : N",constraint=false];
+appointments -> medical_records [label="1 : 0..1"];
+appointments -> visit_services [label="1 : N"];
+services -> visit_services [label="1 : N"];
+appointments -> invoices [label="1 : 0..1"];
+invoices -> invoice_items [label="1 : N"];
+services -> invoice_items [label="1 : N",constraint=false];
+}
