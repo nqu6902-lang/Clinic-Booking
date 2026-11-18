@@ -1,0 +1,70 @@
+
+name: Clinic Booking CI
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  docker-test:
+    name: Build and Test Docker
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Create environment file
+        run: cp .env.example .env
+
+      - name: Check Docker Compose configuration
+        run: docker compose config
+
+      - name: Build Docker images
+        run: docker compose build
+
+      - name: Start containers
+        run: docker compose up -d
+
+      - name: Wait for services
+        run: |
+          for i in {1..30}; do
+            if docker compose exec -T db pg_isready -U clinic -d clinic; then
+              break
+            fi
+            sleep 2
+          done
+
+      - name: Test API health
+        run: |
+          for i in {1..30}; do
+            if curl -fsS http://localhost:8080/api/health; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "API health check failed"
+          docker compose logs
+          exit 1
+
+      - name: Test database connection
+        run: curl --fail http://localhost:8080/api/health/db
+
+      - name: Test Nginx
+        run: curl --fail http://localhost:8080/
+
+      - name: Show container status
+        if: always()
+        run: docker compose ps
+
+      - name: Show logs if failed
+        if: failure()
+        run: docker compose logs
+
+      - name: Stop containers
+        if: always()
+        run: docker compose down -v
