@@ -4,12 +4,18 @@ if (!localStorage.getItem("token") || localStorage.getItem("role") !== "patient"
 }
 
 // ===== DỮ LIỆU GIẢ (thay bằng API thật khi Back-end sẵn sàng) =====
+// Mỗi bác sĩ có khung giờ làm việc riêng (slots) và ngày nghỉ riêng (offDays: 0 = Chủ nhật, 6 = Thứ bảy)
 const MOCK_DOCTORS = [
-  { id: 1, name: "BS. Nguyễn Văn An", specialty: "Nha khoa tổng quát" },
-  { id: 2, name: "BS. Trần Thị Bình", specialty: "Chỉnh nha" },
-  { id: 3, name: "BS. Lê Minh Châu", specialty: "Phục hình răng" }
+  { id: 1, name: "BS. Nguyễn Văn An", specialty: "Nha khoa tổng quát",
+    slots: ["08:00", "09:00", "10:00", "11:00"], offDays: [0] },
+  { id: 2, name: "BS. Trần Thị Bình", specialty: "Chỉnh nha",
+    slots: ["14:00", "15:00", "16:00", "17:00"], offDays: [0, 6] },
+  { id: 3, name: "BS. Lê Minh Châu", specialty: "Phục hình răng",
+    slots: ["08:30", "10:30", "13:30", "15:30"], offDays: [] }
 ];
-const SLOT_TIMES = ["08:00", "09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
+
+const MIN_CANCEL_HOURS = 2; // đặt/hủy phải cách giờ khám ít nhất 2 giờ
+
 let myAppointments = [];            // lịch hẹn của bệnh nhân
 const takenByOthers = new Set(["1|" + today() + "|09:00"]); // giờ đã có người khác đặt
 
@@ -20,6 +26,7 @@ function today() {
   return d.getFullYear() + "-" + m + "-" + day;
 }
 function startOf(date, time) { return new Date(date + "T" + time + ":00"); }
+function hoursUntil(date, time) { return (startOf(date, time) - new Date()) / 3600000; }
 
 // ===== HIỂN THỊ THÔNG BÁO =====
 function showMsg(text, ok) {
@@ -55,13 +62,21 @@ function loadSlots() {
   box.innerHTML = "";
   if (!date) { box.textContent = "Hãy chọn ngày khám."; return; }
 
-  SLOT_TIMES.forEach(function (time) {
+  const doctor = MOCK_DOCTORS.find(function (d) { return d.id === doctorId; });
+  if (!doctor || doctor.slots.length === 0) { box.textContent = "Bác sĩ chưa có lịch làm việc."; return; }
+
+  const weekday = new Date(date + "T00:00:00").getDay();
+  if (doctor.offDays && doctor.offDays.includes(weekday)) {
+    box.textContent = doctor.name + " nghỉ ngày này, hãy chọn ngày khác."; return;
+  }
+
+  doctor.slots.forEach(function (time) {
     const btn = document.createElement("button");
     btn.textContent = time;
-    const past = startOf(date, time) <= new Date();
-    if (past || isTaken(doctorId, date, time)) {
+    const tooSoon = hoursUntil(date, time) < MIN_CANCEL_HOURS;
+    if (tooSoon || isTaken(doctorId, date, time)) {
       btn.disabled = true;
-      btn.title = past ? "Giờ đã qua" : "Đã có người đặt";
+      btn.title = tooSoon ? "Phải đặt trước giờ khám ít nhất 2 giờ" : "Đã có người đặt";
     } else {
       btn.addEventListener("click", function () { book(doctorId, date, time); });
     }
@@ -83,8 +98,9 @@ function book(doctorId, date, time) {
 // ===== LỊCH HẸN CỦA TÔI =====
 function cancelAppointment(id) {
   const a = myAppointments.find(function (x) { return x.id === id; });
-  const hoursLeft = (startOf(a.date, a.time) - new Date()) / 3600000;
-  if (hoursLeft < 2) { showMsg("Chỉ được hủy lịch trước giờ khám ít nhất 2 giờ.", false); return; }
+  if (hoursUntil(a.date, a.time) < MIN_CANCEL_HOURS) {
+    showMsg("Chỉ được hủy lịch trước giờ khám ít nhất 2 giờ.", false); return;
+  }
   a.status = "Đã hủy";
   showMsg("Đã hủy lịch hẹn.", true);
   loadSlots();
@@ -108,8 +124,9 @@ function renderMine() {
       const btn = document.createElement("button");
       btn.textContent = "Hủy";
       btn.className = "small";
-      const hoursLeft = (startOf(a.date, a.time) - new Date()) / 3600000;
-      if (hoursLeft < 2) { btn.disabled = true; btn.title = "Chỉ hủy được trước giờ khám 2 giờ"; }
+      if (hoursUntil(a.date, a.time) < MIN_CANCEL_HOURS) {
+        btn.disabled = true; btn.title = "Chỉ hủy được trước giờ khám 2 giờ";
+      }
       btn.addEventListener("click", function () { cancelAppointment(a.id); });
       tdBtn.appendChild(btn);
     }

@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bác sĩ - Clinic System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard">
+
+  <header class="dashboard-header">
+    <div class="brand">
+      <span class="brand-icon">✚</span>
+      CLINIC SYSTEM
+    </div>
+
+    <div class="header-right">
+      <span class="header-user">Cổng thông tin bác sĩ</span>
+      <button id="logout" class="link">Đăng xuất ↗</button>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+
+    <!-- CỘT TRÁI -->
+    <aside class="sidebar">
+      <div class="sidebar-title">MENU BÁC SĨ</div>
+
+      <a href="#overview" class="active">
+        <span class="menu-icon">⌂</span>
+        Tổng quan
+      </a>
+
+      <a href="#appointments">
+        <span class="menu-icon">▦</span>
+        Lịch khám hôm nay
+      </a>
+
+      <a href="#formPanel">
+        <span class="menu-icon">▤</span>
+        Ghi kết quả khám
+      </a>
+
+      <div class="sidebar-title">HỖ TRỢ</div>
+
+      <a href="#guide">
+        <span class="menu-icon">?</span>
+        Hướng dẫn
+      </a>
+    </aside>
+
+    <!-- CỘT GIỮA -->
+    <main class="main-content">
+
+      <section class="page-heading" id="overview">
+        <h1>Xin chào, bác sĩ 👨‍⚕️</h1>
+        <p>Chúc bạn có một ngày làm việc hiệu quả.</p>
+      </section>
+
+      <p id="msg" hidden></p>
+
+      <!-- DANH SÁCH KHÁM -->
+      <section class="panel" id="appointments">
+
+        <h2>📅 Danh sách khám hôm nay</h2>
+
+        <p>Danh sách bệnh nhân có lịch khám trong ngày.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Giờ khám</th>
+                <th>Bệnh nhân</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+
+            <tbody id="list"></tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <!-- GHI KẾT QUẢ KHÁM -->
+      <section class="panel" id="formPanel" hidden>
+
+        <h2>
+          📝 Ghi kết quả khám:
+          <span id="patientName"></span>
+        </h2>
+
+        <p>Nhập thông tin kết quả khám và dịch vụ đã sử dụng.</p>
+
+        <label for="result">Kết quả khám</label>
+
+        <textarea
+          id="result"
+          rows="5"
+          placeholder="Nhập kết quả khám, chẩn đoán và hướng dẫn điều trị..."
+        ></textarea>
+
+        <h3 style="margin-top: 25px;">🏥 Dịch vụ đã sử dụng</h3>
+
+        <div id="services"></div>
+
+        <div style="margin-top: 20px; padding: 16px; background: #eff6ff; border-radius: 10px;">
+          <p style="margin: 0; color: #1e40af; font-weight: 600;">
+            Tổng chi phí dịch vụ
+          </p>
+          <p id="total" style="margin: 5px 0 0; font-size: 20px; font-weight: 700; color: #1d4ed8;"></p>
+        </div>
+
+        <button id="save">✓ Lưu kết quả khám</button>
+
+      </section>
+
+    </main>
+
+    <!-- CỘT PHẢI -->
+    <aside class="right-panel">
+
+      <section class="info-card">
+        <h3>Thông tin tài khoản</h3>
+
+        <div class="profile-box">
+          <div class="avatar">👨‍⚕️</div>
+
+          <div>
+            <div class="profile-name">Bác sĩ</div>
+            <div class="profile-role">Medical Doctor</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span>Vai trò</span>
+          <strong>Bác sĩ</strong>
+        </div>
+
+        <div class="info-item">
+          <span>Khu vực</span>
+          <strong>Khám bệnh</strong>
+        </div>
+
+        <div class="info-item">
+          <span>Trạng thái</span>
+          <strong style="color:#059669;">Hoạt động</strong>
+        </div>
+      </section>
+
+      <section class="info-card">
+        <h3>⚡ Truy cập nhanh</h3>
+
+        <a href="#appointments" class="quick-link">
+          ▦ Danh sách khám hôm nay
+        </a>
+
+        <a href="#formPanel" class="quick-link">
+          📝 Ghi kết quả khám
+        </a>
+      </section>
+
+      <section class="info-card" id="guide">
+        <h3>💡 Hướng dẫn</h3>
+
+        <p>1. Kiểm tra danh sách bệnh nhân khám hôm nay.</p>
+
+        <p>2. Chọn bệnh nhân cần khám.</p>
+
+        <p>3. Nhập kết quả khám.</p>
+
+        <p>4. Chọn các dịch vụ đã sử dụng.</p>
+
+        <p>5. Lưu kết quả khám.</p>
+      </section>
+
+    </aside>
+
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/doctor.js"></script>
+
+</body>
+</html>
