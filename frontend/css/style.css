@@ -1,0 +1,23 @@
+body { font-family: Arial, sans-serif; background: #f2f5f9; margin: 0; }
+.card { max-width: 360px; margin: 80px auto; background: #fff; padding: 24px;
+        border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+label { display: block; margin-top: 12px; font-size: 14px; }
+input { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+button { width: 100%; margin-top: 16px; padding: 10px; background: #1a73e8;
+         color: #fff; border: 0; border-radius: 4px; cursor: pointer; }
+.error { color: #c62828; background: #fdecea; padding: 8px; border-radius: 4px; }
+.topbar { display: flex; justify-content: space-between; align-items: center;
+          background: #1a73e8; color: #fff; padding: 12px 24px; }
+.link { background: none; border: 0; color: #fff; width: auto; margin: 0;
+        padding: 0; text-decoration: underline; cursor: pointer; }
+.wide { max-width: 800px; margin: 24px auto; padding: 0 16px; }
+.panel { background: #fff; padding: 16px 24px; margin-bottom: 16px;
+         border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.slots { display: flex; flex-wrap: wrap; gap: 8px; }
+.slots button { width: auto; margin: 0; padding: 8px 16px; }
+.slots button:disabled { background: #ccc; cursor: not-allowed; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border-bottom: 1px solid #ddd; padding: 8px; text-align: left; }
+button.small { width: auto; margin: 0; padding: 4px 12px; }
+button:disabled { background: #ccc; cursor: not-allowed; }
+.success { color: #1b5e20; background: #e8f5e9; padding: 8px; border-radius: 4px; }

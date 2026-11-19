@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Clinic Booking</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng nhập - Phòng khám</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Clinic Booking - trang chờ</h1>
-  <p>Trạng thái API: <span id="api">đang kiểm tra...</span></p>
-  <p>Trạng thái CSDL: <span id="db">đang kiểm tra...</span></p>
-  <script>
-    fetch("/api/health").then(r => r.json())
-      .then(d => document.getElementById("api").textContent = d.status)
-      .catch(() => document.getElementById("api").textContent = "lỗi");
-    fetch("/api/health/db").then(r => r.json())
-      .then(d => document.getElementById("db").textContent = d.database)
-      .catch(() => document.getElementById("db").textContent = "lỗi");
-  </script>
+  <main class="card">
+    <h1>Đăng nhập</h1>
+    <p id="error" class="error" hidden></p>
+    <label>Tên đăng nhập
+      <input id="username" autocomplete="username">
+    </label>
+    <label>Mật khẩu
+      <input id="password" type="password" autocomplete="current-password">
+    </label>
+    <button id="btn">Đăng nhập</button>
+  </main>
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bệnh nhân - Phòng khám</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <span>Xin chào, bệnh nhân</span>
+    <button id="logout" class="link">Đăng xuất</button>
+  </header>
+
+  <main class="wide">
+    <p id="msg" hidden></p>
+
+    <section class="panel">
+      <h2>Đặt lịch khám</h2>
+      <label>Bác sĩ
+        <select id="doctor"></select>
+      </label>
+      <label>Ngày khám
+        <input id="date" type="date">
+      </label>
+      <p>Khung giờ trống (bấm vào giờ để đặt):</p>
+      <div id="slots" class="slots"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Lịch hẹn của tôi</h2>
+      <table>
+        <thead>
+          <tr><th>Bác sĩ</th><th>Ngày</th><th>Giờ</th><th>Trạng thái</th><th></th></tr>
+        </thead>
+        <tbody id="myList"></tbody>
+      </table>
+      <p id="empty">Bạn chưa có lịch hẹn nào.</p>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/patient.js"></script>
+</body>
+</html>
