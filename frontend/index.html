@@ -1,43 +1,75 @@
-<<<<<<< HEAD
-<!doctype html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#137c66">
-  <meta name="description" content="Clinic Booking — đặt lịch và quản lý chăm sóc sức khỏe răng miệng.">
-  <title>Clinic Booking · Chăm sóc nụ cười</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='14' fill='%23137c66'/%3E%3Cpath d='M24 12v24M12 24h24' stroke='white' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="/assets/style.css">
-  <script type="module" src="/assets/app.js"></script>
-</head>
-<body>
-  <a class="skip-link" href="#main-content">Đi đến nội dung</a>
-  <div id="app"><div class="initial-loading">Đang mở Clinic Booking…</div></div>
-  <div id="toasts" aria-live="polite" aria-atomic="false"></div>
-  <dialog id="dialog" aria-labelledby="dialog-title"></dialog>
-  <noscript>Bạn cần bật JavaScript để sử dụng giao diện này.</noscript>
-</body>
-</html>
-=======
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Clinic Booking</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng nhập - Clinic System</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <h1>Clinic Booking - trang chờ</h1>
-  <p>Trạng thái API: <span id="api">đang kiểm tra...</span></p>
-  <p>Trạng thái CSDL: <span id="db">đang kiểm tra...</span></p>
-  <script>
-    fetch("/api/health").then(r => r.json())
-      .then(d => document.getElementById("api").textContent = d.status)
-      .catch(() => document.getElementById("api").textContent = "lỗi");
-    fetch("/api/health/db").then(r => r.json())
-      .then(d => document.getElementById("db").textContent = d.database)
-      .catch(() => document.getElementById("db").textContent = "lỗi");
-  </script>
+
+<body class="login-page">
+
+  <main class="card">
+
+    <h1>Đăng nhập</h1>
+
+    <p>Hệ thống quản lý và đặt lịch khám trực tuyến</p>
+
+    <p id="error" class="error" hidden></p>
+
+    <label for="username">Tên đăng nhập</label>
+    <input
+      id="username"
+      autocomplete="username"
+      placeholder="Nhập tên đăng nhập"
+    >
+
+    <label for="password">Mật khẩu</label>
+    <input
+      id="password"
+      type="password"
+      autocomplete="current-password"
+      placeholder="Nhập mật khẩu"
+    >
+
+    <button id="btn">Đăng nhập →</button>
+
+  </main>
+
+  <aside id="demo" class="hint" hidden>
+    <p class="hint-title">🔐 Tài khoản dùng thử</p>
+
+    <table>
+      <tr>
+        <td>Bệnh nhân</td>
+        <td><code>benhnhan</code></td>
+        <td><code>benhnhan</code></td>
+      </tr>
+      <tr>
+        <td>Lễ tân</td>
+        <td><code>letan</code></td>
+        <td><code>letan</code></td>
+      </tr>
+      <tr>
+        <td>Bác sĩ</td>
+        <td><code>bacsi</code></td>
+        <td><code>bacsi</code></td>
+      </tr>
+      <tr>
+        <td>Quản trị</td>
+        <td><code>quantri</code></td>
+        <td><code>quantri</code></td>
+      </tr>
+    </table>
+
+    <p class="hint-note">
+      Tên đăng nhập và mật khẩu giống nhau.
+    </p>
+  </aside>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/login.js"></script>
+
 </body>
 </html>
->>>>>>> 6fd1f268b5be43075b28455b1c691c6c232af56d

@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bệnh nhân - Clinic System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard">
+
+  <!-- THANH TRÊN -->
+  <header class="dashboard-header">
+    <div class="brand">
+      <span class="brand-icon">✚</span>
+      CLINIC SYSTEM
+    </div>
+
+    <div class="header-right">
+      <span class="header-user">Cổng thông tin bệnh nhân</span>
+      <button id="logout" class="link">Đăng xuất ↗</button>
+    </div>
+  </header>
+
+  <!-- BỐ CỤC 3 CỘT -->
+  <div class="dashboard-layout">
+
+    <!-- CỘT TRÁI: MENU -->
+    <aside class="sidebar">
+      <div class="sidebar-title">MENU BỆNH NHÂN</div>
+
+      <a href="#overview" class="active">
+        <span class="menu-icon">⌂</span>
+        Tổng quan
+      </a>
+
+      <a href="#booking">
+        <span class="menu-icon">▦</span>
+        Đặt lịch khám
+      </a>
+
+      <a href="#appointments">
+        <span class="menu-icon">▤</span>
+        Lịch hẹn của tôi
+      </a>
+
+      <a href="#support">
+        <span class="menu-icon">?</span>
+        Hướng dẫn
+      </a>
+    </aside>
+
+    <!-- CỘT GIỮA: NỘI DUNG -->
+    <main class="main-content">
+
+      <section class="page-heading" id="overview">
+        <h1>Xin chào, bệnh nhân 👋</h1>
+        <p>Chào mừng bạn đến với hệ thống phòng khám trực tuyến.</p>
+      </section>
+
+      <!-- THÔNG BÁO -->
+      <p id="msg" hidden></p>
+
+      <!-- ĐẶT LỊCH -->
+      <section class="panel" id="booking">
+        <h2>📅 Đặt lịch khám</h2>
+
+        <p>Vui lòng lựa chọn bác sĩ và ngày khám phù hợp.</p>
+
+        <label for="doctor">Chọn bác sĩ</label>
+        <select id="doctor"></select>
+
+        <label for="date">Chọn ngày khám</label>
+        <input id="date" type="date">
+
+        <p><strong>Khung giờ còn trống</strong></p>
+        <p>Nhấn vào khung giờ để tiến hành đặt lịch.</p>
+
+        <div id="slots" class="slots"></div>
+      </section>
+
+      <!-- LỊCH HẸN -->
+      <section class="panel" id="appointments">
+        <h2>📋 Lịch hẹn của tôi</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Bác sĩ</th>
+                <th>Ngày</th>
+                <th>Giờ</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+
+            <tbody id="myList"></tbody>
+          </table>
+        </div>
+
+        <p id="empty">Bạn chưa có lịch hẹn nào.</p>
+      </section>
+
+    </main>
+
+    <!-- CỘT PHẢI: THÔNG TIN -->
+    <aside class="right-panel">
+
+      <section class="info-card">
+        <h3>Thông tin tài khoản</h3>
+
+        <div class="profile-box">
+          <div class="avatar">👤</div>
+          <div>
+            <div class="profile-name">Bệnh nhân</div>
+            <div class="profile-role">Tài khoản người dùng</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span>Vai trò</span>
+          <strong>Bệnh nhân</strong>
+        </div>
+
+        <div class="info-item">
+          <span>Hệ thống</span>
+          <strong>Clinic</strong>
+        </div>
+      </section>
+
+      <section class="info-card">
+        <h3>Truy cập nhanh</h3>
+
+        <a class="quick-link" href="#booking">
+          ＋ Đặt lịch khám
+        </a>
+
+        <a class="quick-link" href="#appointments">
+          ▤ Xem lịch hẹn
+        </a>
+
+        <a class="quick-link" href="#support">
+          ? Hướng dẫn sử dụng
+        </a>
+      </section>
+
+      <section class="info-card" id="support">
+        <h3>💡 Hướng dẫn</h3>
+
+        <p>1. Chọn bác sĩ cần khám.</p>
+        <p>2. Chọn ngày khám phù hợp.</p>
+        <p>3. Chọn khung giờ còn trống.</p>
+        <p>4. Theo dõi trạng thái lịch hẹn tại mục Lịch hẹn của tôi.</p>
+      </section>
+
+    </aside>
+
+  </div>
+
+  <!-- GIỮ NGUYÊN JAVASCRIPT -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/patient.js"></script>
+
+</body>
+</html>

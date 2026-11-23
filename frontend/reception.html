@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lễ tân - Clinic System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard">
+
+  <header class="dashboard-header">
+    <div class="brand">
+      <span class="brand-icon">✚</span>
+      CLINIC SYSTEM
+    </div>
+
+    <div class="header-right">
+      <span class="header-user">Cổng thông tin lễ tân</span>
+      <button id="logout" class="link">Đăng xuất ↗</button>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+
+    <!-- CỘT TRÁI -->
+    <aside class="sidebar">
+
+      <div class="sidebar-title">MENU LỄ TÂN</div>
+
+      <a href="#overview" class="active">
+        <span class="menu-icon">⌂</span>
+        Tổng quan
+      </a>
+
+      <a href="#appointments">
+        <span class="menu-icon">▦</span>
+        Lịch hẹn hôm nay
+      </a>
+
+      <div class="sidebar-title">HỖ TRỢ</div>
+
+      <a href="#guide">
+        <span class="menu-icon">?</span>
+        Hướng dẫn
+      </a>
+
+    </aside>
+
+    <!-- CỘT GIỮA -->
+    <main class="main-content">
+
+      <section class="page-heading" id="overview">
+        <h1>Xin chào, lễ tân 👋</h1>
+        <p>Quản lý và theo dõi lịch hẹn của phòng khám.</p>
+      </section>
+
+      <p id="msg" hidden></p>
+
+      <!-- DANH SÁCH LỊCH HẸN -->
+      <section class="panel" id="appointments">
+
+        <h2>📅 Lịch hẹn hôm nay</h2>
+
+        <p>Danh sách các lịch hẹn của bệnh nhân trong ngày.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Giờ khám</th>
+                <th>Bệnh nhân</th>
+                <th>Bác sĩ</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+
+            <tbody id="list"></tbody>
+          </table>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- CỘT PHẢI -->
+    <aside class="right-panel">
+
+      <section class="info-card">
+
+        <h3>Thông tin tài khoản</h3>
+
+        <div class="profile-box">
+          <div class="avatar">👩‍💼</div>
+
+          <div>
+            <div class="profile-name">Nhân viên lễ tân</div>
+            <div class="profile-role">Receptionist</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span>Vai trò</span>
+          <strong>Lễ tân</strong>
+        </div>
+
+        <div class="info-item">
+          <span>Khu vực</span>
+          <strong>Tiếp nhận</strong>
+        </div>
+
+        <div class="info-item">
+          <span>Trạng thái</span>
+          <strong style="color:#059669;">Hoạt động</strong>
+        </div>
+
+      </section>
+
+      <section class="info-card">
+
+        <h3>⚡ Truy cập nhanh</h3>
+
+        <a href="#appointments" class="quick-link">
+          ▦ Xem lịch hẹn hôm nay
+        </a>
+
+      </section>
+
+      <section class="info-card" id="guide">
+
+        <h3>💡 Hướng dẫn lễ tân</h3>
+
+        <p>1. Kiểm tra danh sách lịch hẹn.</p>
+
+        <p>2. Xác nhận thông tin bệnh nhân.</p>
+
+        <p>3. Kiểm tra bác sĩ phụ trách.</p>
+
+        <p>4. Theo dõi trạng thái lịch khám.</p>
+
+      </section>
+
+      <section class="info-card">
+
+        <h3>🔔 Lưu ý</h3>
+
+        <p>
+          Kiểm tra kỹ thông tin bệnh nhân và lịch hẹn
+          trước khi thực hiện thao tác.
+        </p>
+
+      </section>
+
+    </aside>
+
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/reception.js"></script>
+
+</body>
+</html>
